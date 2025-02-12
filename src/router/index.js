@@ -11,9 +11,9 @@ import WuqinxiView from '@/WuqinxiView.vue';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: HomeView,
+    redirect: '/home',
   },
+  
   {
     path: '/home',
     name: 'Home',
