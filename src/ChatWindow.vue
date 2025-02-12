@@ -1,119 +1,87 @@
 <template>
-  <!-- 聊天窗口容器 -->
-  <v-container class="pa-4">
-    <v-row>
-      <v-col cols="12">
-        <!-- 聊天历史 -->
-        <div ref="chatContainer" class="chat-container">
-          <div v-for="(message, index) in chatHistory" :key="index">
-            <!-- 用户消息 -->
-            <div v-if="message.sender === 'user'" class="user-message">
-              {{ message.content }}
-            </div>
-            <!-- Kimi 消息 -->
-            <div v-else-if="message.sender === 'kimi'" class="kimi-message">
-              {{ message.content }}
-            </div>
-          </div>
-        </div>
-
-        <!-- 输入框 -->
-        <v-text-field
-          v-model="newMessage"
-          label="输入消息"
-          variant="solo"
-          full-width
-          class="mt-4"
-        >
-          <template #append>
-            <v-btn
-              @click="sendMessage"
-              color="primary"
-              :disabled="!newMessage"
-              prepend-icon="mdi-send"
-            >
-              发送
-            </v-btn>
-          </template>
-        </v-text-field>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="chat-container">
+    <div class="history-container">
+      <van-cell-group>
+        <van-cell
+          v-for="(item, index) in history"
+          :key="index"
+          :title="item.content"
+          :label="item.time"
+          :class="item.isMe ? 'me-message' : 'kimi-message'"
+        />
+      </van-cell-group>
+    </div>
+    <div class="input-container">
+      <van-field
+        v-model="message"
+        placeholder="请输入消息"
+        rows="2"
+        autosize
+        type="textarea"
+        @keypress.enter="sendMessage"
+      />
+      <van-button type="primary" size="small" @click="sendMessage">发送</van-button>
+    </div>
+  </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref } from 'vue';
+import { Cell, CellGroup, Field, Button } from 'vant';
 
 export default {
   name: 'ChatWindow',
+  components: {
+    [Cell.name]: Cell,          // 局部注册 van-cell
+    [CellGroup.name]: CellGroup, // 局部注册 van-cell-group
+    [Field.name]: Field,        // 局部注册 van-field
+    [Button.name]: Button,      // 局部注册 van-button
+  },
   setup() {
-    const chatHistory = ref([]);
-    const newMessage = ref('');
-    const chatContainer = ref(null);
+    const history = ref([]);
+    const message = ref('');
 
-    // 初始化聊天历史
-    chatHistory.value = [
-      {
-        sender: 'kimi',
-        content: '欢迎使用聊天窗口！',
-      },
-    ];
-
-    // 发送消息到后端获取 Kimi 响应
-    async function sendMessage() {
-      const userMessage = {
-        sender: 'user',
-        content: newMessage.value,
-      };
-      chatHistory.value.push(userMessage);
-
-      // 清空输入框
-      newMessage.value = '';
-
-      // 模拟与后端交互（这里替换为实际的 API 调用）
+    // 模拟kimi回复函数
+    const getKimiResponse = async (msg) => {
       try {
-        const response = await axios.post(
-          '/api/getKimiResponse', // 替换为 Kimi 的实际 API 地址
-          { userMessage: userMessage.content }
-        );
-        
-        const kimiMessage = {
-          sender: 'kimi',
-          content: response.data.reply,
-        };
-        chatHistory.value.push(kimiMessage);
+        const response = await fetch('https://api.kimi.com/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg }),
+        });
+        return response.json();
       } catch (error) {
-        console.error('API 请求失败:', error);
-        const kimiMessage = {
-          sender: 'kimi',
-          content: '抱歉，我暂时无法连接到服务器。',
-        };
-        chatHistory.value.push(kimiMessage);
+        console.error('请求失败:', error);
+        return { message: '抱歉，我暂时无法回复你。' };
       }
-
-      // 滚动到底部
-      scrollToBottom();
-    }
-
-    // 滚动到底部
-    const scrollToBottom = () => {
-      setTimeout(() => {
-        if (chatContainer.value) {
-          chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
-        }
-      }, 100);
     };
 
-    // 初始滚动到底部
-    onMounted(() => {
-      scrollToBottom();
-    });
+    const sendMessage = async () => {
+      if (!message.value.trim()) {
+        return;
+      }
+
+      // 显示用户的消息
+      history.value.push({
+        content: message.value,
+        time: new Date().toLocaleTimeString(),
+        isMe: true,
+      });
+
+      // 发送请求并获取kimi的回复
+      const response = await getKimiResponse(message.value);
+      history.value.push({
+        content: response.message,
+        time: new Date().toLocaleTimeString(),
+        isMe: false,
+      });
+
+      message.value = '';
+    };
 
     return {
-      chatHistory,
-      newMessage,
-      chatContainer,
+      history,
+      message,
       sendMessage,
     };
   },
@@ -122,28 +90,37 @@ export default {
 
 <style scoped>
 .chat-container {
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #e0e0e0;
-  padding: 12px;
-  margin-bottom: 20px;
-  background-color: white; /* 确保背景色不是透明 */
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 50px) ; /* 50px 是假设的导航栏高度，根据实际调整 */
 }
 
-.user-message {
-  background-color: #e0e0e0;
-  padding: 8px 12px;
-  border-radius: 15px;
-  margin: 8px 0;
-  text-align: right;
+.history-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ 
+}
+
+.me-message {
+  background-color: #e5f4f7;
+  color: #000;
 }
 
 .kimi-message {
-  background-color: #00ff002d;
-  color: #007000;
-  padding: 8px 12px;
-  border-radius: 15px;
-  margin: 8px 0;
-  text-align: left;
+  background-color: #f5f5f5;
+  color: #006175;
 }
 </style>
