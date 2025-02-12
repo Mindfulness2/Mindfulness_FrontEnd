@@ -3,7 +3,7 @@
     <div class="home-view">
       <!-- 头部导航栏 -->
       <van-nav-bar title="首页" right-text="更多" @click-right="showMore" />
-  
+       <!-- hhhhhhhh -->
       <!-- 轮播组件 -->
       <van-swipe class="swipe-container" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(image, index) in images" :key="index">
