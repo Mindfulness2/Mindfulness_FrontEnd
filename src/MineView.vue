@@ -54,7 +54,7 @@
       <van-cell is-link title="购物中心" @click="goToSelectGender" icon="shop-collect-o" />
       <van-cell is-link title="我的团队" @click="goToSelectGender" icon="friends-o" class="cell-no-border" />
       <van-cell is-link title="帮助中心" @click="goToSelectGender" icon="service-o" class="cell-no-border" />
-      <van-cell is-link title="设置" @click="goToSelectGender" icon="setting-o" />
+      <van-cell is-link title="设置" @click="goToSelectSet" icon="setting-o" />
     </div>
   </div>
 </template>
@@ -103,6 +103,9 @@ export default {
     },
     goTologin() {
       this.$router.push('/login');
+    },
+    goToSelectSet() {
+      this.$router.push('/setting');
     },
   },
 };

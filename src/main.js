@@ -6,8 +6,9 @@ import { Tabbar, TabbarItem } from 'vant';
 import { Toast } from 'vant';
 import { NavBar } from 'vant';
 import { Field, Button, CellGroup } from 'vant';
-import Vuetify from 'vuetify';
+import Vuetify, { VContainer } from 'vuetify';
 import 'vuetify/styles';
+import 'vuetify/dist/vuetify.css';
 // import Vue from 'vue';
 import VueLazyload from 'vue-lazyload';
 
@@ -24,6 +25,7 @@ app.use(NavBar);
 app.use(Field.name, Field);
 app.use(Button.name, Button);
 app.use(CellGroup.name, CellGroup);
+app.component('v-container', VContainer);
 app.use(Vuetify);
 app.use(VueLazyload, {
     preLoad: 1.3, // 预加载高度比例

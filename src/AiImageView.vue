@@ -15,7 +15,7 @@
       :thumb="character.thumb"
     >
       <template #footer>
-        <van-button size="mini" @click="useCharacter(character.title)">使用</van-button>
+        <van-button size="mini" @click="useselectCharacter(character.title)">使用</van-button>
       </template>
     </van-card>
   </div>
@@ -30,6 +30,7 @@ export default {
     'van-card': Card,
     'van-button': Button,
   },
+  
   data() {
     return {
       characters: [
@@ -37,30 +38,31 @@ export default {
           title: "小火龙",
           tag: "傲娇甜妹",
           desc: "描述信息",
-          thumb: "https://example.com/logo.jpg", // 替换为图片路径
+          thumb: require("@/assets/img/pimg1.png"), // 替换为图片路径
         },
         {
           title: "杰尼龟",
           tag: "捣蛋小子",
           desc: "救火队员",
-          thumb: "https://example.com/logo.jpg",
+          thumb:  require("@/assets/img/pimg2.png"),
         },
         {
           title: "妙蛙种子",
           tag: "孩子王",
           desc: "保护性极强",
-          thumb: "https://example.com/logo.jpg",
+          thumb:  require("@/assets/img/pimg3.png"),
         },
       ],
     };
   },
   methods: {
-    useCharacter(name) {
-      console.log(`使用了 ${name}`);
-    },
     goBack() {
         this.$router.go(-1); // 返回上一页
       },
+    useselectCharacter(name) {
+      
+      console.log(`使用了 ${name}`);
+    },  
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <div class="home-view">
       <!-- 头部导航栏 -->
       <van-nav-bar title="首页" right-text="更多" @click-right="showMore" />
-       <!-- hhhhhhhh -->
+  
       <!-- 轮播组件 -->
       <van-swipe class="swipe-container" :autoplay="3000" indicator-color="white">
         <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -91,7 +91,7 @@
   
   <style scoped>
   .home-view {
-    padding: 20px;
+    padding: 10px;
   }
   .swipe-container {
     width: 100%;
@@ -130,7 +130,7 @@
   color: #333;
   text-align: center;
 }
-  .home-content {
+.home-content {
     text-align: center;
     margin-top: 20px;
   }

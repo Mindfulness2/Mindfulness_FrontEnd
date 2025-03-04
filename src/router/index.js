@@ -5,15 +5,16 @@ import ProfileView from '../ProfileView.vue';
 import RegisterView from '../RegisterView.vue';
 import MineView from '@/MineView.vue';
 import Bvdtest1 from '@/BvdTest1VIew.vue';
-import ChatWindow from '@/ChatWindow.vue';
 import AiImageView from '@/AiImageView.vue';
 import WuqinxiView from '@/WuqinxiView.vue';
+import FunctionView from '@/FunctionView.vue';
+import StartzhengnianView from '@/StartzhengnianView.vue';
+import TextToAIView from '@/TalkToAIView.vue';
 const routes = [
   {
     path: '/',
     redirect: '/home',
   },
-  
   {
     path: '/home',
     name: 'Home',
@@ -48,8 +49,8 @@ const routes = [
   ,
   {
     path: '/function',
-    name: 'ChatWindow',
-    component: ChatWindow,
+    name: 'Function',
+    component: FunctionView,
   }
   ,
   {
@@ -62,7 +63,19 @@ const routes = [
     path: '/wuqinxi',
     name: 'Wuqinxi',
     component: WuqinxiView,
-  }
+  },
+  {
+    path: '/startzhengnian',
+    name: 'Startzhengnian',
+    component: StartzhengnianView,
+  },
+  {
+    path: '/talktoai',
+    name: 'Talktoai',
+    component: TextToAIView,
+  },
+   
+ 
 
   // 其他路由...
 ];

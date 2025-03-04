@@ -35,7 +35,7 @@ export default {
   computed: {
     showNavbar() {
       const currentPath = this.$route.path;
-      const hiddenPaths = ['/login', '/register', '/profile'];
+      const hiddenPaths = ['/login', '/register', '/profile', '/talktoai'];
       return !hiddenPaths.includes(currentPath);
     }
   }
