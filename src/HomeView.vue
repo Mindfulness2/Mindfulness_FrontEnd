@@ -1,137 +1,214 @@
+<template>
+  <div class="home-view">
+    <!-- 固定顶部导航栏 -->
+    <van-nav-bar
+      title="首页"
+      right-text="更多"
+      @click-right="showMore"
+      class="fixed-nav-bar"
+    />
 
-  <template>
-    <div class="home-view">
-      <!-- 头部导航栏 -->
-      <van-nav-bar title="首页" right-text="更多" @click-right="showMore" />
-  
-      <!-- 轮播组件 -->
-      <van-swipe class="swipe-container" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-          <img v-lazy="image" class="swipe-image" />
-        </van-swipe-item>
-      </van-swipe>
-  
-      <!-- 页面内容 -->
-      <div class="home-content">
-        <h2>欢迎来到首页!</h2>
-        <p>这里是应用的主页，您可以在这里浏览内容或执行操作。</p>
-        <van-button type="primary" @click="goToProfile">查看个人资料</van-button>
+    <!-- 主体内容 -->
+    <div class="content-container">
+      <!-- 展示图片 -->
+      <div class="featured-image">
+        <img src="@/assets/img/homep1.jpg" alt="封面图片" class="img-fluid" />
       </div>
 
-      <!-- 插槽：自定义格子展示内容 -->
-     <van-row class="custom-grid">
-       <van-col
-         v-for="(item, index) in gridItems"
-         :key="index"
-         :span="8"
-         class="custom-grid-item"
-         @click="handleGridClick(item)"
-       > 
-         <slot name="grid-item" :item="item">
-           <!-- 默认插槽内容 -->
-           <div class="grid-item-content">
-             <img :src="item.image" class="grid-image" />
-             <div class="grid-text">{{ item.text }}</div>
-           </div>
-         </slot>
-       </van-col>
-     </van-row>
-     
+      <!-- 滑动卡片展示 -->
+      <van-swipe class="card-swipe" :autoplay="0" indicator-color="white">
+        <van-swipe-item v-for="(item, index) in gridItems" :key="index">
+          <div class="card-item">
+            <div class="card-header">
+              <div class="card-title">{{ item.text }}</div>
+              <div class="card-description">{{ item.description }}</div>
+            </div>
+            <div class="card-image-container">
+              <img :src="item.image" class="card-image" />
+            </div>
+            <van-button
+              size="small"
+              type="default"
+              class="card-button"
+              @click="handleGridClick(item)"
+            >
+              Let's Go
+            </van-button>
+          </div>
+        </van-swipe-item>
+      </van-swipe>
     </div>
-  </template>
-  
-  <script>
-  import { NavBar, Swipe, SwipeItem, Row, Col, Button,showToast } from 'vant';
-  
-  export default {
-    name: 'HomeView',
-    components: {
-      [NavBar.name]: NavBar,
-      [Swipe.name]: Swipe,
-      [SwipeItem.name]: SwipeItem,
-      [Row.name]: Row,
-      [Col.name]: Col,
-      [Button.name]: Button,
+  </div>
+</template>
+
+<script>
+import { NavBar, Swipe, SwipeItem, Button, showToast } from 'vant';
+
+export default {
+  name: 'HomeView',
+  components: {
+    [NavBar.name]: NavBar,
+    [Swipe.name]: Swipe,
+    [SwipeItem.name]: SwipeItem,
+    [Button.name]: Button,
+  },
+  data() {
+    return {
+      images: [
+        require('@/assets/img/img1.jpg'),
+        require('@/assets/img/img2.jpg'),
+        require('@/assets/img/img3.jpg'),
+      ],
+      gridItems: [
+        {
+          image: require('@/assets/img/mx.png'),
+          text: 'Yoga',
+          description:
+            'Yoga is both a form of physical exercise and a comprehensive philosophy of life. It aims to help users achieve harmony and balance of body and mind through physical practice and breath control.',
+          link: '/wuqinxi',
+        },
+        {
+          image: require('@/assets/img/youga.jpg'),
+          text: 'Tai Chi',
+          description:
+            'Emphasizing natural relaxation, Tai Chi focuses on the coordination of breathing and movements. It requires gentle, slow, and continuous actions. This method combines traditional philosophy, medical theory, and martial arts.',
+          link: '/profile',
+        },
+        {
+          image: require('@/assets/img/mx.png'),
+          text: 'Wu Qin Xi',
+          description:
+            'Based on the movements and demeanor of five animals—tiger, bear, deer, monkey, and bird—Wu Qin Xi aims to strengthen the body and regulate the flow of energy by imitating the characteristics of these animals.',
+          link: '/wuqinxi',
+        },
+        {
+          image: require('@/assets/img/mx.png'),
+          text: 'Baduanjin',
+          description:
+            'Baduanjin is a traditional Chinese fitness Qigong that mainly involves limb movements. It strengthens the body, regulates the flow of energy (Qi), and unblocks the meridians through a series of movements and breathing techniques.',
+          link: '/wuqinxi',
+        },
+        {
+          image: require('@/assets/img/mx.png'),
+          text: 'Meditation',
+          description:
+            'Meditation is a mental training practice that focuses on concentrating the mind. Its core goal is to help users focus their attention on the present moment, eliminate distractions and external disturbances, and achieve inner peace.',
+          link: '/wuqinxi',
+        },
+      ],
+    };
+  },
+  methods: {
+    showMore() {
+      this.$router.push('/profile');
     },
-    data() {
-      return {
-        images: [
-           require('@/assets/img/img1.jpg'),
-           require('@/assets/img/img2.jpg'),
-           require('@/assets/img/img3.jpg'),
-        ],
-        gridItems: [
-        { image: require('@/assets/img/mx.png'), text: '冥想' ,link: '/bvdtest1',},
-        { image: require('@/assets/img/youga.jpg'), text: '太极拳' ,link: '/profile',},
-        { image: require('@/assets/img/mx.png'), text: '五禽戏' ,link: '/wuqinxi',},
-        { image: require('@/assets/img/mx.png'), text: '内容 1' ,link: '/profile',},
-        { image: require('@/assets/img/mx.png'), text: '内容 1' ,link: '/profile',},
-        { image: require('@/assets/img/mx.png'), text: '内容 1' },
-        ],
-      };
+    goToProfile() {
+      this.$router.push('/profile'); // 跳转到个人资料页面
     },
-    methods: {
-      showMore() {
-        this.$router.push('/profile');
-      },
-      goToProfile() {
-        this.$router.push('/profile'); // 跳转到个人资料页面
-      },
-      handleGridClick(item) {
-      // 格子点击事件处理函数
+    handleGridClick(item) {
       if (item.link) {
         this.$router.push(item.link); // 跳转到指定页面
       } else {
         showToast('暂无跳转链接');
       }
-     },
     },
-  };
-  </script>
-  
-  <style scoped>
-  .home-view {
-    padding: 10px;
-  }
-  .swipe-container {
-    width: 100%;
-    height: 200px;
-    margin-bottom: 20px;
-  }
-  .swipe-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .custom-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 三列布局 */
-  gap: 0px; /* 格子之间的间距 */
-  margin-bottom: 20px;
+  },
+};
+</script>
+
+<style scoped>
+.home-view {
+  padding: 0;
 }
-.custom-grid-item {
-  text-align: center;
-  margin-bottom: 20px;
+
+/* 固定顶部导航栏 */
+.fixed-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
-.grid-item-content {
-  display: grid;
-  place-items: center; /* 水平和垂直居中 */
-  height: 100%; /* 确保父容器高度占满 */
+
+/* 内容容器，避免被导航栏遮挡 */
+.content-container {
+  padding-top: 50px; /* 导航栏高度 */
+  padding-bottom: 60px; /* 底部导航栏高度 */
 }
-.grid-image {
-  width: 100px;
-  height: 100px;
+
+.featured-image {
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
 }
-.grid-text {
-  margin-top: 0px;
-  font-size: 10px;
-  color: #333;
+
+.card-swipe {
+  height: 350px; /* 设置滑动区域高度 */
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f9f9f9;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
   text-align: center;
+  margin-bottom: 0px; /* 减少标题与描述之间的间距 */
+  padding-top: 0px; /* 减少标题与卡片顶部的距离 */
 }
-.home-content {
-    text-align: center;
-    margin-top: 20px;
-  }
-  </style>
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 0px; /* 减少标题与描述之间的间距 */
+  color: #333;
+  line-height: 1.4;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1px; /* 减少描述与图片之间的间距 */
+  text-align: center;
+  line-height: 1.6;
+}
+
+.card-image-container {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1px; /* 减少图片与按钮之间的间距 */
+}
+
+.card-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card-button {
+  width: 80%;
+  background-color: #666;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  font-size: 16px;
+}
+</style>
