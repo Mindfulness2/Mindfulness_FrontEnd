@@ -1,6 +1,6 @@
 <template>
   <div class="example-page">
-    <van-nav-bar  class="custom-nav-bar">
+    <van-nav-bar class="custom-nav-bar">
       <!-- 左侧插槽 -->
       <template #left>
         <img src="@/assets/img/adduser.png" class="custom-icon" @click="handleLeftClick" style="width: 28px; height: 28px;" />
@@ -17,10 +17,8 @@
     </van-nav-bar>
     <!-- 页面内容 -->
     <div class="content">
-      <h1>欢迎访问我的页面（仅测试，待删除）</h1>
-      <van-button type="primary" round block @click="onButtonClick" style="font-size: 10px;">
-        点此登录（测试）
-      </van-button>
+      <h1></h1>
+      
     </div>
     <van-card
        
@@ -40,20 +38,20 @@
       </template>
       <template #footer>
         <van-button size="mini" @click="goTologin">登录</van-button>
-        <van-button size="mini" @click="goToSun">退出</van-button>
+        <van-button size="mini" @click="goTologin">退出</van-button>
       </template>
     </van-card>
 
     <div class="cella" style="padding-bottom: 50px;"> <!-- 确保最后一个单元格不会被底部导航栏遮挡 -->
-      <van-cell is-link title="我的收藏" @click="goToHistory" icon="star-o" />
-      <van-cell is-link title="历史记录" @click="goToHistory" icon="todo-list-o" class="cell-no-border" />
-      <van-cell is-link title="历史分数" @click="goToFraction" icon="chart-trending-o" class="cell-no-border" />
+      <!-- <van-cell is-link title="我的收藏" @click="goToHistory" icon="star-o" />
+      <van-cell is-link title="历史记录" @click="goToHistory" icon="todo-list-o" class="cell-no-border" /> -->
+      <van-cell is-link title="历史建议" @click="goToFraction" icon="chart-trending-o" class="cell-no-border" />
       <van-cell is-link title="AI形象选择" @click="goToAIImage" icon="user-circle-o" />
-      <van-cell is-link title="我的钱包" @click="goToHistory" icon="pending-payment" class="cell-no-border" />
+      <!-- <van-cell is-link title="我的钱包" @click="goToHistory" icon="pending-payment" class="cell-no-border" />
       <van-cell is-link title="福利中心" @click="goToHistory" icon="point-gift-o" class="cell-no-border" />
-      <van-cell is-link title="购物中心" @click="goToSelectGender" icon="shop-collect-o" />
-      <van-cell is-link title="我的团队" @click="goToSelectGender" icon="friends-o" class="cell-no-border" />
-      <van-cell is-link title="帮助中心" @click="goToSelectGender" icon="service-o" class="cell-no-border" />
+      <van-cell is-link title="购物中心" @click="goToSelectGender" icon="shop-collect-o" />-->
+      <van-cell is-link title="我的团队" @click="goToMygroup" icon="friends-o" class="cell-no-border" /> 
+      <van-cell is-link title="帮助中心" @click="goToHelp" icon="service-o" class="cell-no-border" />
       <van-cell is-link title="设置" @click="goToSelectSet" icon="setting-o" />
     </div>
   </div>
@@ -101,6 +99,12 @@ export default {
     goTopresonView() {
       this.$router.push('/aiimage');
     },
+    goToMygroup() {
+      this.$router.push('/mygroup');
+    },
+    goToHelp() {
+      this.$router.push('/help');
+    },
     goTologin() {
       this.$router.push('/login');
     },
@@ -112,19 +116,30 @@ export default {
 </script>
 
 <style scoped>
-/*将导航栏van-nav-bar固定在顶部*/ 
+/* 设置页面背景图 */
+.example-page {
+  background-image: url('@/assets/img/background_mine.jpg'); /* 替换为你的背景图路径 */
+  background-size: cover; /* 让背景图自适应页面大小 */
+  background-position: center; /* 让背景图居中 */
+  min-height: 100vh; /* 确保背景图覆盖整个页面 */
+}
+
+/* 将导航栏van-nav-bar固定在顶部 */
 .custom-nav-bar {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
+  background-color: white; /* 导航栏背景色 */
 }
+
 .content {
   text-align: center;
   padding-top: 42px; /* 确保内容不被顶部导航栏遮挡 */
   color: #0a0707;
   font-size: 10px;
 }
+
 /* 在你的样式文件中 */
 .cella ::v-deep .van-cell__title {
   font-size: 15px; /* 设置字体大小 */
@@ -143,10 +158,6 @@ export default {
   border-bottom-width: 0;
 }
 
-.custom-nav-bar {
-  background-color: #fff; /* 自定义背景颜色 */
-}
-
 .right-icons {
   display: flex;
   align-items: center;
@@ -159,9 +170,25 @@ export default {
 .right-icons .img {   
   margin-left: 20px; /* 调整图标之间的间距 */
 }
+
+/* 设置卡片背景透明 */
 .preson-card {
-  background-color: white; /* 设置卡片背景颜色为白色 */
+  background-color: transparent !important; /* 设置卡片背景透明 */
+  border-radius: 10px; /* 添加圆角 */
+  padding: 10px; /* 添加内边距 */
 }
+
+/* 设置单元格背景透明 */
+.cella ::v-deep .van-cell {
+  background-color: transparent !important; /* 设置单元格背景透明 */
+}
+
+/* 设置按钮背景透明 */
+.van-button--primary {
+  background-color: rgba(255, 69, 0, 0.7) !important; /* 半透明橙色按钮 */
+  border: none !important;
+}
+
 ::v-deep .van-card__thumb {
   border-radius: 50%; /* 设置为圆形 */
   overflow: hidden; /* 确保内容不会溢出 */
@@ -172,8 +199,9 @@ export default {
   height: 100%;
   object-fit: cover; /* 确保图片充满容器并裁剪 */
 }
+
 .person-tag {
-  background-color: #ffffff; /* 白色背景 */
+  background-color: rgba(255, 255, 255, 0.7); /* 半透明白色背景 */
   color: #808080 !important; /* 灰色文字，使用 !important 确保样式生效 */
   padding: 3px 10px; /* 内边距 */
   border-radius: 50px; /* 椭圆形 */

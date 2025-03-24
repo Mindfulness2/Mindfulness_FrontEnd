@@ -35,22 +35,22 @@ export default {
     return {
       characters: [
         {
-          title: "小火龙",
+          title: "形象1",
           tag: "傲娇甜妹",
           desc: "描述信息",
-          thumb: require("@/assets/img/pimg1.png"), // 替换为图片路径
+          thumb: require("@/assets/img/homecp1.jpg"), // 替换为图片路径
         },
         {
-          title: "杰尼龟",
+          title: "形象2",
           tag: "捣蛋小子",
           desc: "救火队员",
-          thumb:  require("@/assets/img/pimg2.png"),
+          thumb:  require("@/assets/img/homecp2.jpg"),
         },
         {
-          title: "妙蛙种子",
+          title: "形象3",
           tag: "孩子王",
           desc: "保护性极强",
-          thumb:  require("@/assets/img/pimg3.png"),
+          thumb:  require("@/assets/img/homecp3.jpg"),
         },
       ],
     };

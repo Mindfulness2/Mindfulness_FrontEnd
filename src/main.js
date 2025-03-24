@@ -11,12 +11,15 @@ import 'vuetify/styles';
 import 'vuetify/dist/vuetify.css';
 // import Vue from 'vue';
 import VueLazyload from 'vue-lazyload';
-
+import { Calendar } from 'vant';
+import Vant from 'vant';
 const loadimage = require('@/assets/img/zhuye.png'); // 加载中的图片
 const errorimage = require('@/assets/img/zhuye.png'); // 加载失败的图片
 
 const app = createApp(App);
 
+app.use(Vant);
+app.use(Calendar);
 app.use(router);
 app.use(Tabbar);
 app.use(TabbarItem);

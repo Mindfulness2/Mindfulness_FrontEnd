@@ -6,7 +6,7 @@
       @click-left="goBack"
     />
     <div>
-      <BilibiliVideo videoId="BV1vAcdeGERU" />
+      <BilibiliVideo videoId="BV1h7oyYbEU7" />
     </div>
   </template>
   
