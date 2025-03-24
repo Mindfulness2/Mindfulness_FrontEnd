@@ -10,6 +10,10 @@ import WuqinxiView from '@/WuqinxiView.vue';
 import FunctionView from '@/FunctionView.vue';
 import StartzhengnianView from '@/StartzhengnianView.vue';
 import TextToAIView from '@/TalkToAIView.vue';
+import FractionView from '@/FractionView.vue';
+import MygroupView from '@/MygroupView.vue';
+import HelpView from '@/HelpView.vue';
+import SetView from '@/SetView.vue';
 const routes = [
   {
     path: '/',
@@ -74,8 +78,26 @@ const routes = [
     name: 'Talktoai',
     component: TextToAIView,
   },
-   
- 
+  {
+    path: '/fraction',
+    name: 'Fraction',
+    component: FractionView,
+  },
+  {
+    path: '/mygroup',
+    name: 'Mygroup',
+    component: MygroupView,
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: HelpView,
+  },
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: SetView,
+  },
 
   // 其他路由...
 ];

@@ -5,6 +5,7 @@
         frameborder="0"
         allowfullscreen
         @load="handleLoad"
+        danmaku="0"
       ></iframe>
     </div>
   </template>
@@ -21,7 +22,7 @@
     computed: {
       videoUrl() {
         // 构造哔哩哔哩视频的嵌入 URL
-        return `https://player.bilibili.com/player.html?bvid=${this.videoId}`;
+        return `https://player.bilibili.com/player.html?bvid=${this.videoId}`; // 无弹幕
       },
     },
     methods: {

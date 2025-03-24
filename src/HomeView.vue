@@ -61,35 +61,35 @@ export default {
       ],
       gridItems: [
         {
-          image: require('@/assets/img/mx.png'),
+          image: require('@/assets/img/homecp1.jpg'),
           text: 'Yoga',
           description:
             'Yoga is both a form of physical exercise and a comprehensive philosophy of life. It aims to help users achieve harmony and balance of body and mind through physical practice and breath control.',
           link: '/wuqinxi',
         },
         {
-          image: require('@/assets/img/youga.jpg'),
+          image: require('@/assets/img/homecp2.jpg'),
           text: 'Tai Chi',
           description:
             'Emphasizing natural relaxation, Tai Chi focuses on the coordination of breathing and movements. It requires gentle, slow, and continuous actions. This method combines traditional philosophy, medical theory, and martial arts.',
           link: '/profile',
         },
         {
-          image: require('@/assets/img/mx.png'),
+          image: require('@/assets/img/homecp3.jpg'),
           text: 'Wu Qin Xi',
           description:
             'Based on the movements and demeanor of five animals—tiger, bear, deer, monkey, and bird—Wu Qin Xi aims to strengthen the body and regulate the flow of energy by imitating the characteristics of these animals.',
           link: '/wuqinxi',
         },
         {
-          image: require('@/assets/img/mx.png'),
+          image: require('@/assets/img/homecp4.jpg'),
           text: 'Baduanjin',
           description:
             'Baduanjin is a traditional Chinese fitness Qigong that mainly involves limb movements. It strengthens the body, regulates the flow of energy (Qi), and unblocks the meridians through a series of movements and breathing techniques.',
           link: '/wuqinxi',
         },
         {
-          image: require('@/assets/img/mx.png'),
+          image: require('@/assets/img/homecp5.jpg'),
           text: 'Meditation',
           description:
             'Meditation is a mental training practice that focuses on concentrating the mind. Its core goal is to help users focus their attention on the present moment, eliminate distractions and external disturbances, and achieve inner peace.',
