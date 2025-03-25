@@ -14,6 +14,8 @@ import FractionView from '@/FractionView.vue';
 import MygroupView from '@/MygroupView.vue';
 import HelpView from '@/HelpView.vue';
 import SetView from '@/SetView.vue';
+import ServerSetting from '@/ServerSetting.vue';
+
 const routes = [
   {
     path: '/',
@@ -97,6 +99,11 @@ const routes = [
     path: '/setting',
     name: 'Setting',
     component: SetView,
+  },
+  {
+    path: '/server',
+    name: 'Server',
+    component: ServerSetting,
   },
 
   // 其他路由...

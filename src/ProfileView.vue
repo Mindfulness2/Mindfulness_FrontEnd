@@ -41,10 +41,17 @@
 <script setup>
 import { ref, onMounted, nextTick, watch } from 'vue';
 
+const ipAddress = ref(localStorage.getItem("userIP") || "");const savedIP = ref("");
+onMounted(() => {
+  savedIP.value = localStorage.getItem("userIP") || "localhost";
+});
+
+
 const userInput = ref('');
 const messages = ref([
-  { role: 'ai', content: '你好！我是AI助手，有什么我可以帮你的？' }
+  { role: 'ai', content: 'Hello! I am an AI assistant, how can I help you?' }
 ]);
+
 const messagesContainer = ref(null);
 const isRecording = ref(false);
 let recognition = null;
@@ -110,6 +117,11 @@ const handleEnterKey = (event) => {
   }
 };
 
+// 格式化对话历史，将其转化为合适的prompt
+const formatPrompt = (messages) => {
+  return messages.map(msg => `${msg.role === 'user' ? 'User' : 'AI'}: ${msg.content}`).join("\n");
+};
+
 // 发送消息
 const sendMessage = async () => {
   if (!userInput.value.trim()) return;
@@ -119,10 +131,10 @@ const sendMessage = async () => {
   userInput.value = "";
   
   try {
-    const response = await fetch("http://localhost:11434/api/generate", {
+    const response = await fetch(`http://${ipAddress.value || "localhost"}:11434/api/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: "llama3.2:3b", prompt: userMessage.content }),
+      body: JSON.stringify({ model: "llama3.2:3b", prompt: formatPrompt(messages.value) }),
     });
     
     if (!response.body) throw new Error("❌ API 响应为空");

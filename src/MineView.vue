@@ -53,6 +53,7 @@
       <van-cell is-link title="我的团队" @click="goToMygroup" icon="friends-o" class="cell-no-border" /> 
       <van-cell is-link title="帮助中心" @click="goToHelp" icon="service-o" class="cell-no-border" />
       <van-cell is-link title="设置" @click="goToSelectSet" icon="setting-o" />
+      <van-cell is-link title="ServerSetting" @click="goToServer" icon="setting-o" class="cell-no-border" />
     </div>
   </div>
 </template>
@@ -110,6 +111,9 @@ export default {
     },
     goToSelectSet() {
       this.$router.push('/setting');
+    },
+    goToServer() {
+      this.$router.push('/server');
     },
   },
 };
