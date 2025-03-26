@@ -130,7 +130,8 @@ export default {
     };
 
     const completeCountdown = () => {
-      router.push("/talktoai"); // 跳转到下一级界面
+      //router.push("/talktoai");
+      router.push("/profile");
     };
 
     const cancelCountdown = () => {

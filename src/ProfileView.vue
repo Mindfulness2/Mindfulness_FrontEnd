@@ -5,6 +5,11 @@
     left-arrow
     @click-left="goBack"
   />
+  
+  <div class="container">
+    <img :src="require('@/assets/img/imggif1.gif')" alt="Looping GIF" />
+  </div>
+
   <div class="chat-container">
     <!-- Chat messages area -->
     <div class="messages-container" ref="messagesContainer">
