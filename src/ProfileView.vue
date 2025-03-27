@@ -1,11 +1,6 @@
 <template>
-  <van-nav-bar
-    title="AI对话"
-    left-text="返回"
-    left-arrow
-    @click-left="goBack"
-  />
-  
+  <van-nav-bar title="AI对话" left-text="返回" left-arrow @click-left="goBack" />
+
   <div class="container">
     <img :src="require('@/assets/img/imggif1.gif')" alt="Looping GIF" />
   </div>
@@ -13,29 +8,29 @@
   <div class="chat-container">
     <!-- Chat messages area -->
     <div class="messages-container" ref="messagesContainer">
-      <div v-for="(message, index) in messages" :key="index" 
-           :class="['message-wrapper', message.role === 'user' ? 'user-message-wrapper' : 'ai-message-wrapper']">
+      <div v-for="(message, index) in messages" :key="index"
+        :class="['message-wrapper', message.role === 'user' ? 'user-message-wrapper' : 'ai-message-wrapper']">
         <div :class="['message', message.role === 'user' ? 'user-message' : 'ai-message']">
           {{ message.content }}
         </div>
       </div>
     </div>
-    
+
     <!-- Input area -->
     <div class="input-container">
       <div class="input-wrapper">
-        <textarea 
-          v-model="userInput" 
-          placeholder="输入消息..." 
-          @keydown.enter.prevent="handleEnterKey"
+        <textarea v-model="userInput" placeholder="输入消息..." @keydown.enter.prevent="handleEnterKey"
           class="message-input">
         </textarea>
         <div class="button-group">
           <button class="send-button" @click="sendMessage" :disabled="!userInput.trim()">
             <i class="send-icon">➤</i>
           </button>
-          <button class="voice-button" @click="toggleVoiceInput">
+          <!-- <button class="voice-button" @click="toggleVoiceInput">
             <i class="mic-icon" :class="{ 'recording': isRecording }">🎤</i>
+          </button> -->
+          <button @click="toggleVoiceInput" :disabled="isSending">
+            {{ isRecording ? '🛑' : '🎤' }}
           </button>
         </div>
       </div>
@@ -46,7 +41,7 @@
 <script setup>
 import { ref, onMounted, nextTick, watch } from 'vue';
 
-const ipAddress = ref(localStorage.getItem("userIP") || "");const savedIP = ref("");
+const ipAddress = ref(localStorage.getItem("userIP") || ""); const savedIP = ref("");
 onMounted(() => {
   savedIP.value = localStorage.getItem("userIP") || "localhost";
 });
@@ -74,16 +69,16 @@ const initSpeechRecognition = () => {
       recognition.lang = 'zh-CN';
       recognition.continuous = false;
       recognition.interimResults = false;
-      
+
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         userInput.value = transcript;
       };
-      
+
       recognition.onend = () => {
         isRecording.value = false;
       };
-      
+
       recognition.onerror = (event) => {
         console.error('语音识别错误:', event.error);
         isRecording.value = false;
@@ -102,7 +97,7 @@ const toggleVoiceInput = () => {
     initSpeechRecognition();
     if (!recognition) return;
   }
-  
+
   if (isRecording.value) {
     recognition.stop();
   } else {
@@ -130,25 +125,25 @@ const formatPrompt = (messages) => {
 // 发送消息
 const sendMessage = async () => {
   if (!userInput.value.trim()) return;
-  
+
   const userMessage = { role: "user", content: userInput.value };
   messages.value.push(userMessage);
   userInput.value = "";
-  
+
   try {
     const response = await fetch(`http://${ipAddress.value || "localhost"}:11434/api/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: "llama3.2:3b", prompt: formatPrompt(messages.value) }),
     });
-    
+
     if (!response.body) throw new Error("❌ API 响应为空");
-    
+
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     const aiMessage = { role: "ai", content: "" };
     messages.value.push(aiMessage);
-    
+
     let buffer = "";
     let reading = true;
     while (reading) {
@@ -286,7 +281,8 @@ onMounted(() => {
   gap: 0.5rem;
 }
 
-.send-button, .voice-button {
+.send-button,
+.voice-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -313,7 +309,8 @@ onMounted(() => {
   background-color: #e5e5ea;
 }
 
-.send-icon, .mic-icon {
+.send-icon,
+.mic-icon {
   font-size: 1rem;
 }
 
