@@ -2,7 +2,7 @@
     <div class="page-wrapper">
         <!-- 固定顶部：导航栏和 GIF -->
         <div class="top-fixed">
-            <van-nav-bar title="Chat" left-text="Back" left-arrow @click-left="goBack" />
+            <van-nav-bar title="AI对话" left-text="返回" left-arrow @click-left="goBack" />
             <div class="gif-container">
                 <img :src="require('@/assets/img/GIF.gif')" alt="Looping GIF" />
             </div>
@@ -39,7 +39,6 @@
         </div>
     </div>
 </template>
-
 <script setup>
 import { ref, onMounted, nextTick, watch } from 'vue';
 
@@ -245,11 +244,14 @@ onMounted(() => {
 
 /* 固定底部 */
 .input-fixed {
-  position: sticky;
+  position: fixed; /* 改为 fixed，确保在安卓导航栏之上 */
   bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   background: #fff;
   padding: 10px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom)); /* 适配安卓导航栏 */
 }
 
 .input-container {
@@ -319,5 +321,12 @@ button {
 .ai-message {
   background: #f0f0f0;
   color: black;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .chat-container {
+    margin-bottom: calc(60px + env(safe-area-inset-bottom)); /* 为输入框留出空间 */
+  }
 }
 </style>
