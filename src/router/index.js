@@ -15,6 +15,7 @@ import MygroupView from '@/MygroupView.vue';
 import HelpView from '@/HelpView.vue';
 import SetView from '@/SetView.vue';
 import ServerSetting from '@/ServerSetting.vue';
+import ExpChat from '@/ExpChat.vue';
 
 const routes = [
   {
@@ -104,6 +105,11 @@ const routes = [
     path: '/server',
     name: 'Server',
     component: ServerSetting,
+  },
+  {
+    path:'/exp',
+    name:'Exp',
+    component: ExpChat,
   },
 
   // 其他路由...

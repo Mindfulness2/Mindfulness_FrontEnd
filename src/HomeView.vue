@@ -2,8 +2,8 @@
   <div class="home-view">
     <!-- 固定顶部导航栏 -->
     <van-nav-bar
-      title="首页"
-      right-text="更多"
+      title="Home"
+      right-text="More"
       @click-right="showMore"
       class="fixed-nav-bar"
     />
@@ -93,7 +93,7 @@ export default {
           text: 'Meditation',
           description:
             'Meditation is a mental training practice that focuses on concentrating the mind. Its core goal is to help users focus their attention on the present moment, eliminate distractions and external disturbances, and achieve inner peace.',
-          link: '/wuqinxi',
+          link: '/exp',
         },
       ],
     };

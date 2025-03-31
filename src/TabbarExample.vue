@@ -1,9 +1,9 @@
 <template>
   <van-tabbar v-if="showNavbar" v-model="active">
-    <van-tabbar-item  to="/home" icon="wap-home-o">首页</van-tabbar-item>
-    <van-tabbar-item  to="/function" icon="eye-o">功能</van-tabbar-item>
+    <van-tabbar-item  to="/home" icon="wap-home-o">Home</van-tabbar-item>
+    <van-tabbar-item  to="/function" icon="eye-o">Function</van-tabbar-item>
     <!-- <van-tabbar-item replace to="/friends" icon="friends-o">功能2</van-tabbar-item> -->
-    <van-tabbar-item  to="/mine" icon="contact-o">我的</van-tabbar-item>
+    <van-tabbar-item  to="/mine" icon="contact-o">Me</van-tabbar-item>
     <!-- <van-tabbar-item replace icon="setting-o" @click="goToLogin">我的</van-tabbar-item> -->
   </van-tabbar>
 </template>
@@ -35,7 +35,7 @@ export default {
   computed: {
     showNavbar() {
       const currentPath = this.$route.path;
-      const hiddenPaths = ['/login', '/register', '/profile', '/talktoai'];
+      const hiddenPaths = ['/login', '/register', '/profile', '/exp'];
       return !hiddenPaths.includes(currentPath);
     }
   }
