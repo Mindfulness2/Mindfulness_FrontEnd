@@ -2,7 +2,7 @@
     <div class="page-wrapper">
         <!-- 固定顶部：导航栏和 GIF -->
         <div class="top-fixed">
-            <van-nav-bar title="AI对话" left-text="返回" left-arrow @click-left="goBack" />
+            <van-nav-bar title="Chat" left-text="Back" left-arrow @click-left="goBack" />
             <div class="gif-container">
                 <img :src="require('@/assets/img/GIF.gif')" alt="Looping GIF" />
             </div>
