@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar
-      title="瑜伽课程"
-      left-text="返回"
+      title="YOGA"
+      left-text="Back"
       left-arrow
       @click-left="goBack"
       class="fixed-nav-bar"
@@ -13,7 +13,7 @@
       <div class="button-row">
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV1gb4y1B7jN')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -23,11 +23,11 @@
             alt="Button 1"
             class="image"
           />
-          <span class="button-text">课程1</span>
+          <span class="button-text">Course 1</span>
         </van-button>
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV1U34y1U78j')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -37,13 +37,13 @@
             alt="Button 2"
             class="image"
           />
-          <span class="button-text">课程2</span>
+          <span class="button-text">Course 2</span>
         </van-button>
       </div>
       <div class="button-row">
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV1V5411J7iF')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -53,11 +53,11 @@
             alt="Button 3"
             class="image"
           />
-          <span class="button-text">课程3</span>
+          <span class="button-text">Course 3</span>
         </van-button>
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV14E411R7en')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -67,13 +67,13 @@
             alt="Button 4"
             class="image"
           />
-          <span class="button-text">课程4</span>
+          <span class="button-text">Course 4</span>
         </van-button>
       </div>
       <div class="button-row">
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV17f4y1e7Ga')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -83,11 +83,11 @@
             alt="Button 5"
             class="image"
           />
-          <span class="button-text">课程5</span>
+          <span class="button-text">Course 5</span>
         </van-button>
         <van-button
           class="image-button"
-          @click="goToPage('/bvdtest1')"
+          @click="goToVideoPage('BV197411E79U')"
           :loading="loading"
           loading-type="spinner"
           loading-size="16"
@@ -97,7 +97,7 @@
             alt="Button 6"
             class="image"
           />
-          <span class="button-text">课程6</span>
+          <span class="button-text">Course 6</span>
         </van-button>
       </div>
     </div>
@@ -110,10 +110,10 @@ import { ref } from 'vue';
 const router = useRouter();
 const loading = ref(false);
 
-const goToPage = (path) => {
+const goToVideoPage = (videoId) => {
   loading.value = true;
   setTimeout(() => {
-    router.push(path);
+    router.push({ path: '/bvdtest1', query: { videoId } }); // 使用查询参数传递videoId
     loading.value = false;
   }, 1); // 模拟加载时间
 };
@@ -176,17 +176,23 @@ const goBack = () => {
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* 添加相对定位 */
+  overflow: hidden; /* 防止图片超出按钮框 */
 }
 
 .image-button img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  width: 100%; /* 图片宽度设置为100%，铺满按钮框 */
+  height: 100%; /* 图片高度设置为100%，铺满按钮框 */
+  object-fit: cover; /* 保持图片的宽高比例，裁剪多余部分 */
+  border-radius: 8px; /* 与按钮框的圆角保持一致 */
 }
 
 .button-text {
   font-size: 14px;
   color: #333333;
+  position: absolute; /* 绝对定位 */
+  top: 93%; /* 垂直居中 */
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%, -50%); /* 精确居中 */
 }
 </style>

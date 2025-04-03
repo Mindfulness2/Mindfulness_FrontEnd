@@ -16,6 +16,10 @@ import HelpView from '@/HelpView.vue';
 import SetView from '@/SetView.vue';
 import ServerSetting from '@/ServerSetting.vue';
 import ExpChat from '@/ExpChat.vue';
+import YogaView from '@/YogaView.vue';
+import MingxiangView from '@/MingxiangView.vue';
+import TaijiView from '@/TaijiView.vue';
+import BaduanjingView from '@/BaduanjingView.vue';
 
 const routes = [
   {
@@ -111,7 +115,25 @@ const routes = [
     name:'Exp',
     component: ExpChat,
   },
-
+  {
+    path: '/yoga',
+    name: 'Yoga',
+    component: YogaView,
+  },
+  {
+    path: '/mingxiang',
+    name: 'Mingxiang',
+    component: MingxiangView,
+  },{
+    path: '/taiji',
+    name: 'Taiji',
+    component: TaijiView,
+  },
+  {
+    path: '/baduanjing',
+    name: 'Baduanjing',
+    component: BaduanjingView,
+  },
   // 其他路由...
 ];
 

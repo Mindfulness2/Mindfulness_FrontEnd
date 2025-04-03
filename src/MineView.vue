@@ -45,7 +45,7 @@
       <van-cell is-link title="AI Character" @click="goToAIImage" icon="user-circle-o" />
       <van-cell is-link title="My Team" @click="goToMygroup" icon="friends-o" class="cell-no-border" />
       <van-cell is-link title="Help" @click="goToHelp" icon="service-o" class="cell-no-border" />
-      <van-cell is-link title="Setting" @click="goToSelectSet" icon="setting-o" />
+      <!-- <van-cell is-link title="Setting" @click="goToSelectSet" icon="setting-o" /> -->
       <van-cell is-link title="ServerSetting" @click="goToServer" icon="setting-o" class="cell-no-border" />
     </div>
   </div>
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       savedName: '', // 将 savedName 移到 data 中
-      tags: ['关注：0', '粉丝：0', '训练时长：0']
+      // tags: ['关注：0', '粉丝：0', '训练时长：0']
     };
   },
   mounted() {
@@ -78,16 +78,16 @@ export default {
   },
   methods: {
     handleLeftClick() {
-      showToast('左侧图标被点击');
+      showToast('The icon on the left is clicked, and the function is under construction');
     },
     handleRightClick1() {
-      showToast('手表图标被点击');
+      showToast('The icon on the right is clicked, the function is under construction');
     },
     handleRightClick2() {
-      showToast('右侧图标被点击');
+      showToast('The icon on the right is clicked, the function is under construction');
     },
     onButtonClick() {
-      showToast('按钮被点击了！');
+      showToast('The icon on the right is clicked, the function is under construction');
       this.$router.push('/login');
     },
     goToHistory() {
