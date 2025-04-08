@@ -47,7 +47,7 @@
         class="popup-button"
         @click="completeCountdown"
       >
-        完成
+      Finish
       </van-button>
       <van-button
         block
@@ -55,7 +55,7 @@
         class="popup-button"
         @click="cancelCountdown"
       >
-        取消
+      Cancel
       </van-button>
     </div>
   </van-popup>

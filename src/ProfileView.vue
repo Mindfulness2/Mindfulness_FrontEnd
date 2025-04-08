@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar title="AI对话" left-text="返回" left-arrow @click-left="goBack" />
+  <van-nav-bar title="Talk To AI" left-text="Back" left-arrow @click-left="goBack" />
 
   <div class="container">
     <img :src="require('@/assets/img/imggif1.gif')" alt="Looping GIF" />
