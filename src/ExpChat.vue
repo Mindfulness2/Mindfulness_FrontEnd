@@ -4,7 +4,7 @@
         <div class="top-fixed">
             <van-nav-bar title="Chat" left-text="Back" left-arrow @click-left="goBack" />
             <div class="gif-container">
-                <img :src="require('@/assets/img/GIF.gif')" alt="Looping GIF" />
+                <img :src="require('@/assets/img/2.gif')" alt="Looping GIF" />
             </div>
         </div>
 

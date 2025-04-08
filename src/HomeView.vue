@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     showMore() {
-      this.$router.push('/profile');
+      this.$router.push('/exp');
     },
     goToProfile() {
       this.$router.push('/profile'); // 跳转到个人资料页面

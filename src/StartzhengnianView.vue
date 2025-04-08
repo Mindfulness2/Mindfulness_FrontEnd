@@ -131,7 +131,7 @@ export default {
 
     const completeCountdown = () => {
       //router.push("/talktoai");
-      router.push("/profile");
+      router.push("/exp");
     };
 
     const cancelCountdown = () => {
