@@ -1,27 +1,27 @@
 <template>
   <div class="login-view">
-    <!-- 导航栏 -->
-    <van-nav-bar title="登录" left-text="返回" left-arrow @click-left="goBack" />
+    <!-- Navigation Bar -->
+    <van-nav-bar title="Login" left-text="Back" left-arrow @click-left="goBack" />
 
-    <!-- 登录表单 -->
+    <!-- Login Form -->
     <div class="login-form">
       <van-cell-group inset>
         <van-field
           v-model="username"
-          label="用户名"
-          placeholder="请输入用户名"
-          :rules="[{ required: true, message: '请输入用户名' }]"
+          label="Username"
+          placeholder="Enter your username"
+          :rules="[{ required: true, message: 'Please enter your username' }]"
         />
         <van-field
           v-model="password"
           type="password"
-          label="密码"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请输入密码' }]"
+          label="Password"
+          placeholder="Enter your password"
+          :rules="[{ required: true, message: 'Please enter your password' }]"
         />
       </van-cell-group>
 
-      <!-- 登录按钮 -->
+      <!-- Login Button -->
       <div style="margin: 24px;">
         <van-button
           round
@@ -31,14 +31,14 @@
           :loading="loading"
           :disabled="!username || !password"
         >
-          登录
+          Login
         </van-button>
       </div>
 
-      <!-- 注册链接 -->
+      <!-- Register Link -->
       <div class="register-link">
-        <span>还没有账号？</span>
-        <a @click="goToRegister">立即注册</a>
+        <span>Don't have an account?</span>
+        <a @click="goToRegister">Register now</a>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@ export default {
       try {
         this.loading = true;
 
-        // 发送登录请求
+        // Send login request
         const response = await fetch(
           `http://localhost:3000/api/login?username=${encodeURIComponent(this.username)}&password=${encodeURIComponent(this.password)}`
         );
@@ -70,16 +70,16 @@ export default {
         const data = await response.json();
 
         if (data.success) {
-          // 登录成功，存储用户名并跳转
+          // Login successful, store username and navigate
           localStorage.setItem('userName', data.data.username);
-          alert('登录成功');
+          alert('Login successful');
           this.$router.push('/home');
         } else {
           alert(data.message);
         }
       } catch (error) {
-        console.error('登录错误:', error);
-        alert('登录失败，请稍后重试');
+        console.error('Login error:', error);
+        alert('Login failed, please try again later');
       } finally {
         this.loading = false;
       }
