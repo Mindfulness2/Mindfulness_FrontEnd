@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar
-      title="AI形象选择"
-      left-text="返回"
+      title="AI Character Selection"
+      left-text="Back"
       left-arrow
       @click-left="goBack"
     />
@@ -15,7 +15,7 @@
       :thumb="character.thumb"
     >
       <template #footer>
-        <van-button size="mini" @click="useselectCharacter(character.title)">使用</van-button>
+        <van-button size="mini" @click="useselectCharacter(character.title)">Use</van-button>
       </template>
     </van-card>
   </div>
@@ -35,21 +35,21 @@ export default {
     return {
       characters: [
         {
-          title: "形象1",
-          tag: "傲娇甜妹",
-          desc: "描述信息",
-          thumb: require("@/assets/img/homecp1.jpg"), // 替换为图片路径
+          title: "Character 1",
+          tag: "Sweet Tsundere",
+          desc: "Description",
+          thumb: require("@/assets/img/homecp1.jpg"), // Replace with image path
         },
         {
-          title: "形象2",
-          tag: "捣蛋小子",
-          desc: "救火队员",
+          title: "Character 2",
+          tag: "Troublemaker",
+          desc: "Firefighter",
           thumb:  require("@/assets/img/homecp2.jpg"),
         },
         {
-          title: "形象3",
-          tag: "孩子王",
-          desc: "保护性极强",
+          title: "Character 3",
+          tag: "Leader of Kids",
+          desc: "Highly Protective",
           thumb:  require("@/assets/img/homecp3.jpg"),
         },
       ],
@@ -57,11 +57,11 @@ export default {
   },
   methods: {
     goBack() {
-        this.$router.go(-1); // 返回上一页
+        this.$router.go(-1); // Go back to the previous page
       },
     useselectCharacter(name) {
       
-      console.log(`使用了 ${name}`);
+      console.log(`Selected ${name}`);
     },  
   },
 };

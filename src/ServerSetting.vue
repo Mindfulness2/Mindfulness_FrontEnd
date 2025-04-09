@@ -1,23 +1,24 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const ipAddress = ref(localStorage.getItem("userIP") || "");const savedIP = ref("");
+const ipAddress = ref(localStorage.getItem("userIP") || "");
+const savedIP = ref("");
 
 onMounted(() => {
-  savedIP.value = localStorage.getItem("userIP") || "未设置 IP";
+  savedIP.value = localStorage.getItem("userIP") || "No IP set";
 });
 
 const saveIP = () => {
   if (ipAddress.value) {
     localStorage.setItem("userIP", ipAddress.value);
-    alert("IP 地址已保存！");
+    alert("IP address saved!");
   } else {
-    alert("请输入有效的 IP 地址！");
+    alert("Please enter a valid IP address!");
   }
 };
 
 const goBack = () => {
-  window.history.back(); // 返回上一页
+  window.history.back(); // Go back to the previous page
 };
 </script>
 
@@ -29,11 +30,11 @@ const goBack = () => {
     @click-left="goBack"
   />
   <div class="container">
-    <h2>当前保存的 IP 地址：</h2>
+    <h2>Current saved IP address:</h2>
     <p>{{ savedIP }}</p>
-    <h2>请输入服务器 IP 地址：</h2>
-    <input v-model="ipAddress" placeholder="输入 IP 地址" />
-    <button @click="saveIP">确认</button>
+    <h2>Please enter the server IP address:</h2>
+    <input v-model="ipAddress" placeholder="Enter IP address" />
+    <button @click="saveIP">Confirm</button>
   </div>
 </template>
 

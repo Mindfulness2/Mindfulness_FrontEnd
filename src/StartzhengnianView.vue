@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar
-    title="正念倒计时"
-    left-text="返回"
+    title="Mindfulness Countdown"
+    left-text="Back"
     left-arrow
     @click-left="$router.go(-1)"
     :border="false"
@@ -18,19 +18,19 @@
     </div>
 
     <div class="button-group">
-      <!-- 开始按钮 -->
+      <!-- Start Button -->
       <div class="image-button" @click="startCountdown">
-        <img src="@/assets/img/yun1.png" alt="开始" />
+        <img src="@/assets/img/yun1.png" alt="Start" />
       </div>
 
-      <!-- 暂停按钮 -->
+      <!-- Pause Button -->
       <div class="image-button" @click="pauseCountdown">
-        <img src="@/assets/img/yun2.png" alt="暂停" />
+        <img src="@/assets/img/yun2.png" alt="Pause" />
       </div>
 
-      <!-- 结束按钮 -->
+      <!-- End Button -->
       <div class="image-button" @click="handleEndOrComplete">
-        <img src="@/assets/img/yun3.png" alt="结束" />
+        <img src="@/assets/img/yun3.png" alt="End" />
       </div>
     </div>
   </div>
@@ -59,9 +59,9 @@
       </van-button>
     </div>
   </van-popup>
-  <!-- 页面底部显示图片 -->
+  <!-- Bottom Image -->
   <div class="bottom-image">
-    <img :src="require('@/assets/img/GIF.gif')" alt="底部图片" />
+    <img :src="require('@/assets/img/GIF.gif')" alt="Bottom Image" />
   </div>
 </template>
 
@@ -79,18 +79,18 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const startTime = ref(10); // 倒计时初始时间（秒）
+    const startTime = ref(10); // Initial countdown time (seconds)
     const currentTime = ref(startTime.value);
     const countdownTimer = ref(null);
-    const countdownStatus = ref("start"); // 倒计时状态：start、active、pause
-    const showPopup = ref(false); // 控制弹窗显示
+    const countdownStatus = ref("start"); // Countdown status: start, active, pause
+    const showPopup = ref(false); // Control popup visibility
 
-    const totalLength = 2 * Math.PI * 90; // 圆的周长
+    const totalLength = 2 * Math.PI * 90; // Circumference of the circle
 
     const elapsedTime = computed(() => startTime.value - currentTime.value);
     const progressDash = computed(() => (elapsedTime.value / startTime.value) * totalLength);
 
-    // 格式化时间
+    // Format time
     const formatTime = computed(() => {
       const minutes = Math.floor(currentTime.value / 60);
       const seconds = currentTime.value % 60;
@@ -100,11 +100,11 @@ export default {
     const startCountdown = () => {
       if (countdownTimer.value) clearInterval(countdownTimer.value);
       
-      // 如果当前状态是“暂停”，则直接恢复倒计时，不重置时间
+      // If the current status is "pause", resume countdown without resetting time
       if (countdownStatus.value === "pause") {
         countdownStatus.value = "active";
       } else {
-        // 如果是首次开始或重新开始，则重置时间
+        // If starting for the first time or restarting, reset time
         currentTime.value = startTime.value;
         countdownStatus.value = "active";
       }
@@ -126,7 +126,7 @@ export default {
     const handleEndOrComplete = () => {
       clearInterval(countdownTimer.value);
       countdownStatus.value = "start";
-      showPopup.value = true; // 显示弹窗
+      showPopup.value = true; // Show popup
     };
 
     const completeCountdown = () => {
@@ -136,7 +136,7 @@ export default {
 
     const cancelCountdown = () => {
       showPopup.value = false;
-      countdownStatus.value = "pause"; // 恢复暂停状态
+      countdownStatus.value = "pause"; // Restore pause state
     };
 
     return {
@@ -164,10 +164,6 @@ export default {
   justify-content: flex-start;
   min-height: 90vh;
   background-color: #FEFDFC;
-  /* background-image: url('@/assets/img/GIF.gif'); */
-  /* background-size: cover; */
-  /* background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('@/assets/img/bjt.jpg') no-repeat center center;
-  background-size: cover; */
 }
 
 .countdown {
@@ -192,16 +188,16 @@ export default {
 
 .button-group {
   display: flex;
-  flex-direction: row; /* 修改为水平排列 */
-  gap: 20px; /* 按钮之间的间距 */
+  flex-direction: row; /* Horizontal alignment */
+  gap: 20px; /* Spacing between buttons */
   align-items: center;
   justify-content: center;
   width: 80%;
 }
 
 .image-button {
-  width: 30%; /* 每个按钮占据容器宽度的30% */
-  height: 100px; /* 设置按钮高度 */
+  width: 30%; /* Each button occupies 30% of the container width */
+  height: 100px; /* Button height */
   cursor: pointer;
   background: #FEFDFC;
 }
@@ -232,7 +228,7 @@ export default {
 .nav-right {
   flex: 1;
 }
-/* 页面底部图片样式 */
+/* Bottom image styles */
 .bottom-image {
   position: fixed;
   bottom: 0;

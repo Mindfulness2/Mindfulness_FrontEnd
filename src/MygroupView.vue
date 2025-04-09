@@ -1,7 +1,7 @@
 <template>
     <div class="team-page">
       <!-- 返回按钮 -->
-      <van-nav-bar title="我的团队" left-text="返回" left-arrow @click-left="goBack" />
+      <van-nav-bar title="MyGroup" left-text="Back" left-arrow @click-left="goBack" />
   
       <!-- 团队成员列表 -->
       <div class="team-list">

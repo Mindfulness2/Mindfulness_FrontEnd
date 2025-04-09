@@ -24,7 +24,7 @@
         <div class="input-fixed">
             <div class="input-container">
                 <div class="input-wrapper">
-                    <textarea v-model="userInput" placeholder="输入消息..." @keydown.enter.prevent="handleEnterKey"
+                    <textarea v-model="userInput" placeholder="Input message..." @keydown.enter.prevent="handleEnterKey"
                         class="message-input"></textarea>
                     <div class="button-group">
                         <button class="send-button" @click="sendMessage" :disabled="!userInput.trim()">

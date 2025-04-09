@@ -20,6 +20,7 @@ import YogaView from '@/YogaView.vue';
 import MingxiangView from '@/MingxiangView.vue';
 import TaijiView from '@/TaijiView.vue';
 import BaduanjingView from '@/BaduanjingView.vue';
+import ProfileView_backUp from '@/ProfileView_backUp.vue';
 
 const routes = [
   {
@@ -133,6 +134,11 @@ const routes = [
     path: '/baduanjing',
     name: 'Baduanjing',
     component: BaduanjingView,
+  },
+  {
+    path: '/backup',
+    name: 'backup',
+    component: ProfileView_backUp,
   },
   // 其他路由...
 ];
