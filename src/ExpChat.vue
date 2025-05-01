@@ -131,7 +131,7 @@ const sendMessage = async () => {
             model: "ft:LoRA/Qwen/Qwen2.5-32B-Instruct:s35lsgeihi:mindfulness:snbtwzwckaxeashhweyv",
             messages: [
                 { role: "system", content: "You are a psychotherapist." },
-                ...mappedMessages, // 使用转换后的消息
+                ...mappedMessages,
             ],
             stream: false,
             max_tokens: 4096,
@@ -155,7 +155,7 @@ const sendMessage = async () => {
             ],
         };
 
-        console.log("发送的请求体:", JSON.stringify(payload)); // 调试用
+        console.log("发送的请求体:", JSON.stringify(payload));
 
         const response = await fetch("https://api.siliconflow.cn/v1/chat/completions", {
             method: "POST",
@@ -172,11 +172,34 @@ const sendMessage = async () => {
         }
 
         const data = await response.json();
-        console.log("API 返回数据:", data); // 调试用
+        console.log("API 返回数据:", data);
 
         const aiMessage = { role: "assistant", content: data.choices[0].message.content };
         messages.value.push(aiMessage);
         await nextTick();
+
+        // 添加记录suggestion到后端的调用
+        const today = new Date().toISOString().split('T')[0]; // 获取当天日期如 "2025-04-10"
+        try {
+            const suggestionResponse = await fetch(`http://localhost:3000/api/suggestions/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: "67b635b24c5e2c6c1b82ae3a", // 假设这是当前用户ID
+                    date: today,
+                    suggestion: aiMessage.content
+                }),
+            });
+
+            if (!suggestionResponse.ok) {
+                console.error("记录suggestion失败:", await suggestionResponse.text());
+            }
+        } catch (error) {
+            console.error("调用后端API记录suggestion时出错:", error);
+        }
+
     } catch (error) {
         console.error("❌ 与 SiliconFlow API 通信时出错:", error);
         messages.value.push({ role: "assistant", content: `抱歉，与AI服务通信时出错: ${error.message}` });
